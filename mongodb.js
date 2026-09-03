@@ -1,11 +1,13 @@
 
 const { MongoClient } = require('mongodb');
 
+require('dotenv').config();
+
 
 //main function to connect to the MongoDB Atlas cluster
 async function main() {
 
-    const uri = "mongodb+srv://charlesisama:charlesisama@cluster0.6buuruz.mongodb.net/?appName=Cluster0";
+    const uri = process.env.MONGODB_URI;
 
     const client = new MongoClient(uri);
 
@@ -17,6 +19,7 @@ async function main() {
         await listDatabases(client);
 
     } catch (e) {
+        console.error("❌ MongoDB connection failed:");
         console.error(e);
     }
 
